@@ -1,0 +1,8 @@
+fastapi>=0.100.0
+uvicorn>=0.23.0
+python-multipart
+opencv-python-headless>=4.8.0
+numpy
+google-generativeai
+python-dotenv
+requests

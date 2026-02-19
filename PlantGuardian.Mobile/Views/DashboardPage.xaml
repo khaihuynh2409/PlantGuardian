@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PlantGuardian.Mobile.ViewModels"
+             x:Class="PlantGuardian.Mobile.Views.DashboardPage"
+             Title="Dashboard">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            
+            <Frame BackgroundColor="#E8F6F3" Padding="20" CornerRadius="10">
+                <VerticalStackLayout>
+                    <Label Text="Weather Today" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="{Binding Temperature}" FontSize="36" TextColor="#2ECC71" />
+                    <Label Text="{Binding WeatherSummary}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Label Text="Alerts &amp; Tips" FontSize="20" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding Alerts}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,5" Padding="10" BackgroundColor="#FDEDEC" BorderColor="#E74C3C">
+                            <Label Text="{Binding .}" TextColor="#C0392B" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Refresh" Command="{Binding LoadDataCommand}" />
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

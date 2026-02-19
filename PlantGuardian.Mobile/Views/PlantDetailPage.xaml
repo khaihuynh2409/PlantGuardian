@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PlantGuardian.Mobile.ViewModels"
+             x:Class="PlantGuardian.Mobile.Views.PlantDetailPage"
+             Title="{Binding Plant.Name}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            <Image Source="{Binding Plant.ImageUrl}" HeightRequest="250" Aspect="AspectFill" />
+            
+            <Label Text="{Binding Plant.Name}" FontSize="28" FontAttributes="Bold" />
+            <Label Text="{Binding Plant.Species}" FontSize="18" TextColor="Gray" />
+            <Label Text="{Binding Plant.SoilType, StringFormat='Soil: {0}'}" FontSize="16" />
+            
+            <Button Text="Delete Plant" BackgroundColor="Red" Command="{Binding DeletePlantCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

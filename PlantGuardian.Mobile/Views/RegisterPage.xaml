@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PlantGuardian.Mobile.ViewModels"
+             x:Class="PlantGuardian.Mobile.Views.RegisterPage"
+             Title="Register">
+
+    <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+
+        <Label Text="Create Account" FontSize="32" HorizontalOptions="Center" />
+
+        <Entry Placeholder="Username" Text="{Binding Username}" />
+        <Entry Placeholder="Email" Keyboard="Email" Text="{Binding Email}" />
+        <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" />
+
+        <Label Text="{Binding StatusMessage}" TextColor="Red" />
+
+        <Button Text="Register" Command="{Binding RegisterCommand}" />
+        
+    </VerticalStackLayout>
+</ContentPage>
