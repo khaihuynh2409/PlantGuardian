@@ -36,5 +36,8 @@ public partial class PlantListViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private async Task AddPlant()
+    {
         await Shell.Current.GoToAsync(nameof(Views.AddPlantPage));
+    }
 }
