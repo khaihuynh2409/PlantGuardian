@@ -33,8 +33,15 @@ public partial class PlantDetailViewModel : ObservableObject
         bool confirm = await App.Current!.MainPage!.DisplayAlert("Xác nhận", "Bạn có chắc muốn xóa cây này?", "Xóa", "Hủy");
         if (!confirm) return;
 
-        // await _apiService.DeleteAsync($"plants/{Plant.Id}");
-        await Shell.Current.GoToAsync("..");
+        var success = await _apiService.DeleteAsync($"plants/{Plant.Id}");
+        if (success) 
+        {
+            await Shell.Current.GoToAsync("..");
+        }
+        else
+        {
+            await App.Current!.MainPage!.DisplayAlert("Lỗi", "Không thể xóa cây", "OK");
+        }
     }
 
     /// <summary>Navigate to the specialized BeanDetailPage for bean plants.</summary>

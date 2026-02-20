@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PlantGuardian.Mobile.ViewModels"
+             x:Class="PlantGuardian.Mobile.Views.AddPlantPage"
+             Title="Thêm Cây Mới">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+            <Label Text="Tạo hồ sơ cây trồng mới" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,10"/>
+
+            <Label Text="Tên cây (VD: Bé Đậu, Sen Cưng)" />
+            <Entry Text="{Binding Name}" Placeholder="Nhập tên cây..." />
+
+            <Label Text="Giống cây (VD: Đậu Nành, Sen Đá)" />
+            <Entry Text="{Binding Species}" Placeholder="Tùy chọn" />
+
+            <Label Text="Phân loại cây trồng" />
+            <Picker ItemsSource="{Binding PlantTypes}"
+                    SelectedItem="{Binding SelectedPlantType}"
+                    Title="Chọn loại cây..." />
+
+            <Label Text="Loại đất trồng" />
+            <Entry Text="{Binding SoilType}" Placeholder="VD: Đất mùn, đất tơi xốp..." />
+
+            <Label Text="Ngày bắt đầu trồng / mua" />
+            <DatePicker Date="{Binding DatePlanted}" />
+
+            <Label Text="{Binding StatusMessage}" TextColor="Red" HorizontalOptions="Center" />
+
+            <Button Text="Lưu Cây" Command="{Binding SavePlantCommand}" 
+                    BackgroundColor="#4CAF50" TextColor="White"
+                    CornerRadius="10" HeightRequest="50" Margin="0,20,0,0" FontAttributes="Bold" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

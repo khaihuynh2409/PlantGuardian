@@ -47,10 +47,8 @@ public partial class ChatViewModel : ObservableObject
         
         try 
         {
-            // Python Service on port 8000
             using var client = new HttpClient();
-            // Emulator: 10.0.2.2:8000. Windows: localhost:8000
-            client.BaseAddress = new Uri("http://10.0.2.2:8000/"); 
+            client.BaseAddress = new Uri(AppConfig.AiBaseUrl); 
              
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(request);
             var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");

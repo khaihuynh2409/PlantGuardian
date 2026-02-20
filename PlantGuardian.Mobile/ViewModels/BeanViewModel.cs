@@ -97,10 +97,10 @@ public partial class BeanViewModel : ObservableObject
         IsLoading = true;
         try
         {
-            // Use the /bean-advice endpoint in the AI service (port 8000)
+            // Use the /bean-advice endpoint in the AI service via AppConfig
             var request = new { plant_type = Plant.PlantType, question, growth_stage = "" };
             var result = await _apiService.PostAsync<object, BeanAdviceResponse>(
-                "http://10.0.2.2:8000/bean-advice", request);
+                $"{AppConfig.AiBaseUrl}bean-advice", request);
 
             var answer = result?.Advice ?? "Không nhận được phản hồi.";
             await App.Current!.MainPage!.DisplayAlert("Lời khuyên từ AI 🤖", answer, "OK");

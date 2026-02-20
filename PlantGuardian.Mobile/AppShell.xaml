@@ -28,4 +28,5 @@
         <ResourceDictionary/>
     </Shell.Resources>
 
+    <MenuItem Text="Đăng xuất" Command="{Binding LogoutCommand}" />
 </Shell>

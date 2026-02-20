@@ -46,4 +46,10 @@ public partial class LoginViewModel : ObservableObject
             StatusMessage = "Login failed. Check credentials.";
         }
     }
+
+    [RelayCommand]
+    async Task GoToRegister()
+    {
+        await Shell.Current.GoToAsync(nameof(Views.RegisterPage));
+    }
 }

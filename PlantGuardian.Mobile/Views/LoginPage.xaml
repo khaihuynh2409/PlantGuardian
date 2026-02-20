@@ -18,5 +18,11 @@
 
         <Button Text="Login" Command="{Binding LoginCommand}" />
         
+        <Label Text="Chưa có tài khoản? Đăng ký ngay" TextColor="Blue" TextDecorations="Underline" HorizontalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoToRegisterCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
+        
     </VerticalStackLayout>
 </ContentPage>
