@@ -51,7 +51,7 @@ public static class AppConfig
 Mở Terminal / PowerShell tại thư mục thư mục `PlantGuardian.Mobile` và chạy lệnh sau:
 
 ```bash
-dotnet publish -f net10.0-android -c Release
+dotnet publish -f net8.0-android -c Release
 ```
 
 Sau khi chạy xong, file APK hoàn chỉnh sẽ nằm trong đường dẫn:
