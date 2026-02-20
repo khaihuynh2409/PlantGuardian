@@ -12,10 +12,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Setup .NET 8
+    - name: Setup .NET 9
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '9.0.x'
 
     - name: Install .NET MAUI Workloads
       run: dotnet workload install maui-android --ignore-failed-sources
@@ -23,11 +23,11 @@ jobs:
     - name: Build and Publish Android APK
       run: |
         cd PlantGuardian.Mobile
-        dotnet publish -f net8.0-android -c Release -p:AndroidPackageFormat=apk
+        dotnet publish -f net9.0-android -c Release -p:AndroidPackageFormat=apk
       shell: pwsh
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: PlantGuardian-Android-APK
-        path: PlantGuardian.Mobile/bin/Release/net8.0-android/*-Signed.apk
+        path: PlantGuardian.Mobile/bin/Release/net9.0-android/*-Signed.apk
