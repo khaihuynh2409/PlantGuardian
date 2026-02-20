@@ -11,13 +11,13 @@ public partial class LoginViewModel : ObservableObject
     private readonly ApiService _apiService;
 
     [ObservableProperty]
-    string username;
+    string username = string.Empty;
 
     [ObservableProperty]
-    string password;
+    string password = string.Empty;
 
     [ObservableProperty]
-    string statusMessage;
+    string statusMessage = string.Empty;
 
     public LoginViewModel(ApiService apiService)
     {

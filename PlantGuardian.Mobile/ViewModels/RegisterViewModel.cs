@@ -10,16 +10,16 @@ public partial class RegisterViewModel : ObservableObject
     private readonly ApiService _apiService;
 
     [ObservableProperty]
-    string username;
+    string username = string.Empty;
 
     [ObservableProperty]
-    string email;
+    string email = string.Empty;
 
     [ObservableProperty]
-    string password;
+    string password = string.Empty;
 
     [ObservableProperty]
-    string statusMessage;
+    string statusMessage = string.Empty;
 
     public RegisterViewModel(ApiService apiService)
     {
