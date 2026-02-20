@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PlantGuardian.Mobile.Services;
 using PlantGuardian.Mobile.Models;
+using PlantGuardian.Mobile.Views;
 using System.Collections.ObjectModel;
 
 namespace PlantGuardian.Mobile.ViewModels;
