@@ -6,9 +6,7 @@
              Title="{Binding Plant.Name}"
              BackgroundColor="#F0F7EE">
 
-    <ContentPage.BindingContext>
-        <vm:BeanViewModel />
-    </ContentPage.BindingContext>
+    <!-- BindingContext set in code-behind to support DI -->
 
     <ScrollView>
         <VerticalStackLayout Spacing="0">

@@ -19,10 +19,14 @@
                     <Frame Padding="0" CornerRadius="10" HeightRequest="150" IsClippedToBounds="True">
                        <Grid>
                            <Image Source="{Binding ImageUrl}" Aspect="AspectFill" />
-                           <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" Opacity="0.7">
-                               <GradientStop Color="Transparent" Offset="0.5" />
-                               <GradientStop Color="Black" Offset="1.0" />
-                           </LinearGradientBrush>
+                           <BoxView Opacity="0.7" VerticalOptions="Fill" HorizontalOptions="Fill">
+                               <BoxView.Background>
+                                   <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                       <GradientStop Color="Transparent" Offset="0.5" />
+                                       <GradientStop Color="Black" Offset="1.0" />
+                                   </LinearGradientBrush>
+                               </BoxView.Background>
+                           </BoxView>
                            <Label Text="{Binding Name}" TextColor="White" 
                                   VerticalOptions="End" HorizontalOptions="Center" 
                                   Margin="0,0,0,10" FontAttributes="Bold" />
