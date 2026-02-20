@@ -10,11 +10,11 @@ public static class AppConfig
     // Local (Android emulator)  : http://10.0.2.2:5000/api/
     // Local (Windows PC)        : http://localhost:5000/api/
     // Railway cloud             : https://plantguardian-api.up.railway.app/api/
-    public const string ApiBaseUrl = "charming-exploration-production.up.railway.app";
+    public const string ApiBaseUrl = "https://charming-exploration-production.up.railway.app/api/";
 
     // ─── Python AI Service (FastAPI) ─────────────────────────────────────────
     // Local (Android emulator)  : http://10.0.2.2:8000/
     // Local (Windows PC)        : http://localhost:8000/
     // Railway cloud             : https://plantguardian-ai.up.railway.app/
-    public const string AiBaseUrl = "plantguardian-production.up.railway.app";
+    public const string AiBaseUrl = "https://plantguardian-production.up.railway.app/";
 }
