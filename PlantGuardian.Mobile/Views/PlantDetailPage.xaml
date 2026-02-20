@@ -11,9 +11,19 @@
             
             <Label Text="{Binding Plant.Name}" FontSize="28" FontAttributes="Bold" />
             <Label Text="{Binding Plant.Species}" FontSize="18" TextColor="Gray" />
-            <Label Text="{Binding Plant.SoilType, StringFormat='Soil: {0}'}" FontSize="16" />
-            
-            <Button Text="Delete Plant" BackgroundColor="Red" Command="{Binding DeletePlantCommand}" />
+            <Label Text="{Binding Plant.SoilType, StringFormat='Đất: {0}'}" FontSize="16" />
+            <Label Text="{Binding Plant.PlantType, StringFormat='Loại cây: {0}'}" FontSize="16" />
+
+            <!-- Bean Detail Button - only visible for bean plant types -->
+            <Button Text="🫘 Xem Chi Tiết Chăm Sóc Đậu"
+                    Command="{Binding ViewBeanDetailsCommand}"
+                    IsVisible="{Binding IsBean}"
+                    BackgroundColor="#4CAF50" TextColor="White"
+                    CornerRadius="10" HeightRequest="50" FontSize="15" FontAttributes="Bold"/>
+
+            <Button Text="Xóa Cây" BackgroundColor="Red" TextColor="White"
+                    Command="{Binding DeletePlantCommand}"
+                    CornerRadius="10" HeightRequest="44"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

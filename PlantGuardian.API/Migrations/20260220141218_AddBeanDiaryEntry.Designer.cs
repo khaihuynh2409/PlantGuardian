@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PlantGuardian.API.Data;
 
@@ -11,9 +12,11 @@ using PlantGuardian.API.Data;
 namespace PlantGuardian.API.Migrations
 {
     [DbContext(typeof(PlantGuardianContext))]
-    partial class PlantGuardianContextModelSnapshot : ModelSnapshot
+    [Migration("20260220141218_AddBeanDiaryEntry")]
+    partial class AddBeanDiaryEntry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

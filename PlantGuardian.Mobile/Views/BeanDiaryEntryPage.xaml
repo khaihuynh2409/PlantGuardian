@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PlantGuardian.Mobile.ViewModels"
+             x:Class="PlantGuardian.Mobile.Views.BeanDiaryEntryPage"
+             Title="Thêm Nhật Ký Phát Triển"
+             BackgroundColor="#F0F7EE">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="20">
+
+            <Label Text="📓 Ghi Nhật Ký Hôm Nay"
+                   FontSize="20" FontAttributes="Bold" TextColor="#2D5016"
+                   HorizontalOptions="Center"/>
+
+            <!-- Growth Stage Picker -->
+            <Frame CornerRadius="10" Padding="14" BackgroundColor="White" BorderColor="#C8E6C9">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="🌱 Giai Đoạn Phát Triển" FontSize="13" TextColor="#666"/>
+                    <Picker ItemsSource="{Binding GrowthStages}"
+                            SelectedItem="{Binding SelectedStage}"
+                            TextColor="#2D5016" FontSize="16"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Health Rating -->
+            <Frame CornerRadius="10" Padding="14" BackgroundColor="White" BorderColor="#C8E6C9">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="❤️ Đánh Giá Sức Khỏe (1-5)" FontSize="13" TextColor="#666"/>
+                    <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+                        <Button Text="1" WidthRequest="48" HeightRequest="48" CornerRadius="24"
+                                Command="{Binding BindingContext.SetRatingCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                CommandParameter="1"
+                                BackgroundColor="{Binding HealthRating, Converter={StaticResource RatingButtonColorConverter}, ConverterParameter=1}"/>
+                        <Button Text="2" WidthRequest="48" HeightRequest="48" CornerRadius="24"
+                                Command="{Binding BindingContext.SetRatingCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                CommandParameter="2"
+                                BackgroundColor="{Binding HealthRating, Converter={StaticResource RatingButtonColorConverter}, ConverterParameter=2}"/>
+                        <Button Text="3" WidthRequest="48" HeightRequest="48" CornerRadius="24"
+                                Command="{Binding BindingContext.SetRatingCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                CommandParameter="3"
+                                BackgroundColor="{Binding HealthRating, Converter={StaticResource RatingButtonColorConverter}, ConverterParameter=3}"/>
+                        <Button Text="4" WidthRequest="48" HeightRequest="48" CornerRadius="24"
+                                Command="{Binding BindingContext.SetRatingCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                CommandParameter="4"
+                                BackgroundColor="{Binding HealthRating, Converter={StaticResource RatingButtonColorConverter}, ConverterParameter=4}"/>
+                        <Button Text="5" WidthRequest="48" HeightRequest="48" CornerRadius="24"
+                                Command="{Binding BindingContext.SetRatingCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                CommandParameter="5"
+                                BackgroundColor="{Binding HealthRating, Converter={StaticResource RatingButtonColorConverter}, ConverterParameter=5}"/>
+                    </HorizontalStackLayout>
+                    <Label Text="{Binding HealthRating, StringFormat='Điểm đã chọn: {0}/5'}"
+                           HorizontalOptions="Center" TextColor="#666" FontSize="13"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Height -->
+            <Frame CornerRadius="10" Padding="14" BackgroundColor="White" BorderColor="#C8E6C9">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="📏 Chiều Cao Cây (cm) - tùy chọn" FontSize="13" TextColor="#666"/>
+                    <Entry Placeholder="Ví dụ: 25.5"
+                           Text="{Binding HeightText}"
+                           Keyboard="Numeric"
+                           FontSize="16" TextColor="#333"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Notes -->
+            <Frame CornerRadius="10" Padding="14" BackgroundColor="White" BorderColor="#C8E6C9">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="📝 Ghi Chú" FontSize="13" TextColor="#666"/>
+                    <Editor Placeholder="Nhập quan sát của bạn hôm nay... (màu lá, tình trạng, thời tiết...)"
+                            Text="{Binding Notes}"
+                            HeightRequest="120" FontSize="14" TextColor="#333"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Action Buttons -->
+            <Button Text="💾 Lưu Nhật Ký" Command="{Binding SaveEntryCommand}"
+                    IsEnabled="{Binding IsSaving, Converter={StaticResource InverseBoolConverter}}"
+                    BackgroundColor="#4CAF50" TextColor="White"
+                    CornerRadius="12" HeightRequest="52" FontSize="16" FontAttributes="Bold"/>
+
+            <Button Text="Hủy" Command="{Binding CancelCommand}"
+                    BackgroundColor="Transparent" TextColor="#666"
+                    BorderColor="#CCC" BorderWidth="1"
+                    CornerRadius="12" HeightRequest="44"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -22,3 +22,8 @@ env/
 [Aa]rtifacts/
 .DS_Store
 Thumbs.db
+
+# Secrets - do NOT commit these
+appsettings.Development.json
+
+# Add appsettings.json template (keep appsettings.json but protect secrets in it)

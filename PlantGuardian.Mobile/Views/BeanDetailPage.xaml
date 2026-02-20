@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PlantGuardian.Mobile.ViewModels"
+             x:Class="PlantGuardian.Mobile.Views.BeanDetailPage"
+             Title="{Binding Plant.Name}"
+             BackgroundColor="#F0F7EE">
+
+    <ContentPage.BindingContext>
+        <vm:BeanViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="0">
+
+            <!-- Hero Image -->
+            <Grid HeightRequest="220">
+                <Image Source="{Binding Plant.ImageUrl}" Aspect="AspectFill" />
+                <BoxView BackgroundColor="#80000000" />
+                <VerticalStackLayout VerticalOptions="End" Padding="20,0,20,16">
+                    <Label Text="{Binding BeanEmoji, StringFormat='{0} {1}'}"
+                           FontSize="36" TextColor="White" HorizontalOptions="Center"/>
+                    <Label Text="{Binding CareProfile.DisplayName}"
+                           FontSize="22" FontAttributes="Bold" TextColor="White"
+                           HorizontalOptions="Center"/>
+                    <Label Text="{Binding CareProfile.Description}"
+                           FontSize="12" TextColor="#CCFFFFFF"
+                           HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Watering Alert -->
+            <Frame Margin="16,12,16,0" CornerRadius="12" Padding="14"
+                   BackgroundColor="{Binding WateringSchedule.NeedsWateringNow, Converter={StaticResource BoolToColorConverter}, ConverterParameter='#FFF3CD|#D4EDDA'}"
+                   BorderColor="Transparent">
+                <HorizontalStackLayout Spacing="10">
+                    <Label FontSize="24" VerticalOptions="Center"
+                           Text="{Binding WateringSchedule.NeedsWateringNow, Converter={StaticResource BoolToStringConverter}, ConverterParameter='💧|✅'}"/>
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label Text="{Binding WateringSchedule.Message}"
+                               FontSize="14" FontAttributes="Bold" TextColor="#333"/>
+                        <Label Text="{Binding WateringSchedule.WateringFrequencyDays, StringFormat='Chu kỳ tưới: {0} ngày/lần'}"
+                               FontSize="12" TextColor="#666"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- Care Info Cards -->
+            <Label Text="🌿 Thông Tin Chăm Sóc" FontSize="16" FontAttributes="Bold"
+                   Margin="16,16,16,8" TextColor="#2D5016"/>
+
+            <Grid Margin="16,0,16,0" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                <!-- Sunlight -->
+                <Frame Grid.Row="0" Grid.Column="0" CornerRadius="10" Padding="12" BackgroundColor="White" BorderColor="#E8F5E9">
+                    <VerticalStackLayout>
+                        <Label Text="☀️ Ánh Sáng" FontSize="12" TextColor="#666"/>
+                        <Label Text="{Binding CareProfile.SunlightHoursPerDay, StringFormat='{0} giờ/ngày'}"
+                               FontSize="16" FontAttributes="Bold" TextColor="#2D5016"/>
+                    </VerticalStackLayout>
+                </Frame>
+                <!-- Soil pH -->
+                <Frame Grid.Row="0" Grid.Column="1" CornerRadius="10" Padding="12" BackgroundColor="White" BorderColor="#E8F5E9">
+                    <VerticalStackLayout>
+                        <Label Text="🪣 pH Đất" FontSize="12" TextColor="#666"/>
+                        <Label Text="{Binding CareProfile.SoilPhRange}"
+                               FontSize="16" FontAttributes="Bold" TextColor="#2D5016"/>
+                    </VerticalStackLayout>
+                </Frame>
+                <!-- Temp -->
+                <Frame Grid.Row="1" Grid.Column="0" CornerRadius="10" Padding="12" BackgroundColor="White" BorderColor="#E8F5E9">
+                    <VerticalStackLayout>
+                        <Label Text="🌡️ Nhiệt Độ" FontSize="12" TextColor="#666"/>
+                        <Label Text="{Binding CareProfile.IdealTemperatureCelsius}"
+                               FontSize="14" FontAttributes="Bold" TextColor="#2D5016"/>
+                    </VerticalStackLayout>
+                </Frame>
+                <!-- Duration -->
+                <Frame Grid.Row="1" Grid.Column="1" CornerRadius="10" Padding="12" BackgroundColor="White" BorderColor="#E8F5E9">
+                    <VerticalStackLayout>
+                        <Label Text="📅 Thu Hoạch" FontSize="12" TextColor="#666"/>
+                        <Label Text="{Binding CareProfile.GrowthDurationDays, StringFormat='{0} ngày'}"
+                               FontSize="16" FontAttributes="Bold" TextColor="#2D5016"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+
+            <!-- Fertilizer Schedule -->
+            <Frame Margin="16,10,16,0" CornerRadius="10" Padding="14" BackgroundColor="White" BorderColor="#E8F5E9">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="🌾 Lịch Bón Phân" FontSize="13" TextColor="#666"/>
+                    <Label Text="{Binding CareProfile.FertilizerSchedule}"
+                           FontSize="14" TextColor="#333"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Harvest Tips -->
+            <Frame Margin="16,10,16,0" CornerRadius="10" Padding="14" BackgroundColor="White" BorderColor="#E8F5E9">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="🧺 Thu Hoạch" FontSize="13" TextColor="#666"/>
+                    <Label Text="{Binding CareProfile.HarvestTips}"
+                           FontSize="14" TextColor="#333"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Common Diseases -->
+            <Label Text="⚠️ Bệnh Thường Gặp" FontSize="16" FontAttributes="Bold"
+                   Margin="16,16,16,8" TextColor="#2D5016"/>
+            <CollectionView ItemsSource="{Binding CareProfile.CommonDiseases}" Margin="16,0,16,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,0,0,6" CornerRadius="8" Padding="12,8" BackgroundColor="#FFF8E1" BorderColor="#FFE082">
+                            <Label Text="{Binding .}" FontSize="13" TextColor="#5D4037"/>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Diary Section -->
+            <Label Text="📓 Nhật Ký Phát Triển" FontSize="16" FontAttributes="Bold"
+                   Margin="16,16,16,4" TextColor="#2D5016"/>
+
+            <Button Text="+ Thêm Nhật Ký" Command="{Binding GoToAddDiaryCommand}"
+                    BackgroundColor="#4CAF50" TextColor="White"
+                    CornerRadius="10" Margin="16,0,16,8" HeightRequest="44"/>
+
+            <CollectionView ItemsSource="{Binding DiaryEntries}" Margin="16,0,16,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,0,0,8" CornerRadius="10" Padding="14" BackgroundColor="White" BorderColor="#C8E6C9">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                    <Label Text="{Binding GrowthStage}" FontSize="14" FontAttributes="Bold" TextColor="#2D5016"/>
+                                    <Label Text="{Binding EntryDate, StringFormat='{0:dd/MM/yyyy}'}"
+                                           FontSize="12" TextColor="#888"/>
+                                    <Label Text="{Binding Notes}" FontSize="13" TextColor="#555"/>
+                                    <Label Text="{Binding HeightCm, StringFormat='Chiều cao: {0} cm'}"
+                                           FontSize="12" TextColor="#666" IsVisible="{Binding HeightCm, Converter={StaticResource NullToBoolConverter}}"/>
+                                </VerticalStackLayout>
+                                <Label Grid.Column="1" FontSize="24" VerticalOptions="Center"
+                                       Text="{Binding HealthRating, Converter={StaticResource RatingToEmojiConverter}}"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- AI Ask Button -->
+            <Button Text="🤖 Hỏi AI về cây đậu này"
+                    Command="{Binding AskAIAboutBeanCommand}"
+                    BackgroundColor="#1565C0" TextColor="White"
+                    CornerRadius="10" Margin="16,12,16,32" HeightRequest="48"
+                    FontSize="15"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

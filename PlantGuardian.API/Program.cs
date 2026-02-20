@@ -1,19 +1,21 @@
 using Microsoft.EntityFrameworkCore;
 using PlantGuardian.API.Data;
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models; 
+using Microsoft.OpenApi.Models;
 using PlantGuardian.API.Services;
-using Swashbuckle.AspNetCore.Filters; 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IWeatherService, WeatherService>();
 builder.Services.AddScoped<INotificationService, FirebaseNotificationService>();
 builder.Services.AddScoped<IGamificationService, GamificationService>();
+builder.Services.AddSingleton<IBeanCareService, BeanCareService>();
 builder.Services.AddHttpClient();
 builder.Services.AddHttpContextAccessor();
 
@@ -30,21 +32,28 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Update Swagger to support Bearer Token
+// Swagger with Bearer Token support
 builder.Services.AddSwaggerGen(options =>
 {
-    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "Standard Authorization header using the Bearer scheme (\"bearer {token}\")",
-        In = ParameterLocation.Header,
+        Description = "JWT Authorization header. Example: 'Bearer {token}'",
         Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
     });
-
-    options.OperationFilter<SecurityRequirementsOperationFilter>();
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+            },
+            Array.Empty<string>()
+        }
+    });
 });
-// Note: SecurityRequirementsOperationFilter requires Swashbuckle.AspNetCore.Filters package.
-// Or manual configuration. I'll add the package or do manual config.
 
 builder.Services.AddDbContext<PlantGuardianContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

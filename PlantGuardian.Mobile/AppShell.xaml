@@ -23,4 +23,9 @@
         <ShellContent ContentTemplate="{DataTemplate views:ChatPage}" Route="ChatPage" />
     </FlyoutItem>
 
+    <!-- Bean-specific Pages (registered as routes, not flyout items) -->
+    <Shell.Resources>
+        <ResourceDictionary/>
+    </Shell.Resources>
+
 </Shell>

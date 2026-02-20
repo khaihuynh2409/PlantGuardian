@@ -13,6 +13,7 @@ namespace PlantGuardian.API.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Plant> Plants { get; set; }
         public DbSet<PlantLog> PlantLogs { get; set; }
+        public DbSet<BeanDiaryEntry> BeanDiaryEntries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +29,12 @@ namespace PlantGuardian.API.Data
                 .HasMany(p => p.Logs)
                 .WithOne(l => l.Plant)
                 .HasForeignKey(l => l.PlantId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<BeanDiaryEntry>()
+                .HasOne(e => e.Plant)
+                .WithMany()
+                .HasForeignKey(e => e.PlantId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

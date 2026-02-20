@@ -41,6 +41,12 @@ public static class MauiProgram
         builder.Services.AddTransient<PlantDetailViewModel>();
         builder.Services.AddTransient<PlantDetailPage>();
 
+        builder.Services.AddTransient<BeanViewModel>();
+        builder.Services.AddTransient<BeanDetailPage>();
+
+        builder.Services.AddTransient<BeanDiaryEntryViewModel>();
+        builder.Services.AddTransient<BeanDiaryEntryPage>();
+
         builder.Services.AddSingleton<ChatViewModel>();
         builder.Services.AddSingleton<ChatPage>();
 
