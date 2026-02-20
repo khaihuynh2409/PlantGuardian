@@ -1,0 +1,33 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "master", "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-android:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET 8
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Install .NET MAUI Workloads
+      run: dotnet workload install maui-android --ignore-failed-sources
+
+    - name: Build and Publish Android APK
+      run: |
+        cd PlantGuardian.Mobile
+        dotnet publish -f net8.0-android -c Release -p:AndroidPackageFormat=apk
+      shell: pwsh
+
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: PlantGuardian-Android-APK
+        path: PlantGuardian.Mobile/bin/Release/net8.0-android/*-Signed.apk
